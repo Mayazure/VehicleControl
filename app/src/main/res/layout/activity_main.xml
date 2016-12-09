@@ -55,6 +55,11 @@
                 android:layout_height="wrap_content"
                 android:text="开启同步"/>
 
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="定速巡航"/>
+
         </LinearLayout>
 
             <SeekBar
