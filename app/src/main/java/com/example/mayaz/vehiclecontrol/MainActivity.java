@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     private byte[] R_Table = {-54,-55,-56,-57,-58,-59,-60,-61,-62,-63,-127,-126,-125,-124,-123,-122,-121,-120,-119,-118,-128};
     private byte[] L_Table = {74,73,72,71,70,69,68,67,66,65,1,2,3,4,5,6,7,8,9,10,0};
-    private boolean SYNC_FLAG = false;
+    private boolean FLAG_SYNC = false;
+    private boolean FLAG_VKEEP = false;
 
     private TextView LeftControlBarInfo;
     private TextView RightControlBarInfo;
@@ -67,10 +68,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    SYNC_FLAG = true;
+                    FLAG_SYNC = true;
                 }
                 else{
-                    SYNC_FLAG = false;
+                    FLAG_SYNC = false;
                 }
             }
         });
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 index = (code/5 == 20)?19:code/5;
             }
 
-            if (SYNC_FLAG == false){
+            if (FLAG_SYNC == false){
                 byte sendVal = 0;
                 if(key==R.id.LeftControlBar){
                     sendVal = L_Table[index];
