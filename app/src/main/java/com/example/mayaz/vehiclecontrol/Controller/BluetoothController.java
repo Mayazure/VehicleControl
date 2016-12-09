@@ -8,8 +8,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import com.example.mayaz.vehiclecontrol.MainActivity;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.UUID;
@@ -34,26 +32,15 @@ public class BluetoothController {
         this.address = address;
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mBluetoothAdapter.enable();
-    }
-
-    public void connect(){
-
-        DisplayToast("正在尝试连接");
         BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
-        if (device == null) {
-            DisplayToast("未找到远程设备");
-            Log.e(TAG, "no remote device");
-            return;
-        }
-
         try {
             btSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
         } catch (IOException e) {
-            DisplayToast("套接字创建失败！");
+            DisplayToast("无法创建套接字");
         }
-        DisplayToast("连接成功");
-        mBluetoothAdapter.cancelDiscovery();
+    }
 
+    public void connect(){
         try {
             btSocket.connect();
             DisplayToast("套接字连接成功");
@@ -71,7 +58,7 @@ public class BluetoothController {
         try {
             outStream = btSocket.getOutputStream();
         } catch (IOException e) {
-            Log.e(TAG, "ON RESUME: Output stream creation failed.", e);
+            Log.e(TAG, "Bluetooth: Output stream creation failed.", e);
         }
         try {
             if(len == 1){
@@ -82,7 +69,7 @@ public class BluetoothController {
                 outStream.write(Ctr[1]);
             }
         } catch (IOException e) {
-            Log.e(TAG, "ON RESUME: Exception during write.", e);
+            Log.e(TAG, "Bluetooth: Exception during write.", e);
         }
     }
 
@@ -99,9 +86,8 @@ public class BluetoothController {
 
     private void DisplayToast(String str)
     {
-        Toast toast=Toast.makeText(context.getApplicationContext(), str, Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.TOP, 0, 220);
+        Toast toast=Toast.makeText(context.getApplicationContext(), str, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.BOTTOM, 0, 220);
         toast.show();
     }
-
 }
