@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">VehicleControl</string>
+    <string name="MainTextViewInfo">Test Info: </string>
+</resources>
