@@ -40,6 +40,11 @@ public class BluetoothController {
 
         DisplayToast("正在尝试连接");
         BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
+        if (device == null) {
+            DisplayToast("未找到远程设备");
+            Log.e(TAG, "no remote device");
+            return;
+        }
 
         try {
             btSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
@@ -53,6 +58,7 @@ public class BluetoothController {
             btSocket.connect();
             DisplayToast("套接字连接成功");
         } catch (IOException e) {
+            DisplayToast("无法连接到蓝牙设备");
             try {
                 btSocket.close();
             } catch (IOException e2) {
@@ -61,22 +67,39 @@ public class BluetoothController {
         }
     }
 
-    public void send(byte[] Ctr){
+    public void send(byte[] Ctr, int len){
         try {
             outStream = btSocket.getOutputStream();
         } catch (IOException e) {
             Log.e(TAG, "ON RESUME: Output stream creation failed.", e);
         }
         try {
-            outStream.write(Ctr);
+            if(len == 1){
+                outStream.write(Ctr[0]);
+            }
+            else{
+                outStream.write(Ctr[0]);
+                outStream.write(Ctr[1]);
+            }
         } catch (IOException e) {
             Log.e(TAG, "ON RESUME: Exception during write.", e);
         }
     }
 
+    public void close(){
+        if(btSocket.isConnected()){
+            try {
+                btSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                DisplayToast("套接字无法关闭");
+            }
+        }
+    }
+
     private void DisplayToast(String str)
     {
-        Toast toast=Toast.makeText(context, str, Toast.LENGTH_LONG);
+        Toast toast=Toast.makeText(context.getApplicationContext(), str, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.TOP, 0, 220);
         toast.show();
     }

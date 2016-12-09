@@ -44,21 +44,44 @@
 
             <Button
                 android:id="@+id/Clear"
-                android:text="Clear"
                 android:onClick="Clear"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="清空"/>
 
             <Switch
                 android:id="@+id/Sync"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="开启同步"/>
+                android:text="同步保持"/>
 
             <Switch
+                android:id="@+id/VKeep"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="定速巡航"/>
+                android:text="速度保持"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/Stop"
+                android:onClick="Stop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="制动"/>
+
+            <Button
+                android:id="@+id/Reset"
+                android:onClick="Reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="回位"/>
+
+
 
         </LinearLayout>
 
