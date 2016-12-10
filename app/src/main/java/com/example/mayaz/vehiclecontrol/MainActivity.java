@@ -33,6 +33,8 @@ public class MainActivity extends Activity {
 
     private boolean FLAG_SYNC = false;
     private boolean FLAG_VKEEP = false;
+    private boolean isPressed_L = false;
+    private boolean isPressed_R = false;
 
     private BluetoothController bluetoothController;
 
@@ -170,6 +172,13 @@ public class MainActivity extends Activity {
 
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
+            int key = seekBar.getId();
+            if (key == R.id.LeftControlBar){
+                isPressed_L = true;
+            }
+            else if (key == R.id.RightControlBar){
+                isPressed_R = true;
+            }
 
         }
 
@@ -183,6 +192,12 @@ public class MainActivity extends Activity {
                 if(key==R.id.RightControlBar){
                     seekBar.setProgress(50);
                 }
+            }
+            if (key == R.id.LeftControlBar){
+                isPressed_L = true;
+            }
+            else if (key == R.id.RightControlBar){
+                isPressed_R = true;
             }
             OutInfo.append("\n");
         }
