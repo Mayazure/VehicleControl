@@ -1,4 +1,4 @@
-package com.example.mayaz.vehiclecontrol.Util;
+package com.example.mayaz.vehiclecontrol.util;
 
 /**
  * Created by mayaz on 2016/12/9.
@@ -16,7 +16,11 @@ public class Const {
             67, 66, 65, 1,  2,  3,  4,
             5,  6,  7,  8,  9,  10, 0};//左侧控制指令表
 
-    public static final String address = "20:16:05:30:97:82"; //要连接的蓝牙设备MAC地址（测试用）
+    //要连接的蓝牙设备MAC地址（测试用）
+    public static final String address = "20:16:05:30:97:82";
+    public static final String address1 = "98:D3:35:00:9A:F2";
+
+    public static final String UUID = "00001101-0000-1000-8000-00805F9B34FB";
 
     public static final boolean Debug = true;
 }

@@ -1,4 +1,4 @@
-package com.example.mayaz.vehiclecontrol.Controller;
+package com.example.mayaz.vehiclecontrol.action.bluetooth;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import com.example.mayaz.vehiclecontrol.controller.activity.base.BaseController;
+import com.example.mayaz.vehiclecontrol.util.Const;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.UUID;
@@ -16,32 +19,27 @@ import java.util.UUID;
  * Created by mayaz on 2016/12/9.
  */
 
-public class BluetoothController {
+public class BluetoothAction {
 
     private BluetoothAdapter mBluetoothAdapter = null;//本地蓝牙适配器
     private BluetoothSocket btSocket = null;//蓝牙通讯套接字
     private OutputStream outStream = null;//输出流
-    private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private static final UUID MY_UUID = UUID.fromString(Const.UUID);
     private String address = null;// 要连接的蓝牙设备地址
 
     private static final String TAG = "BluetoothController";
     private Context context = null;
 
-    public BluetoothController(){
-        init(null, null);
+    private BaseController AC;
+
+    public BluetoothAction (Context context, String address, BaseController AC){
+        init(context, address, AC);
     }
 
-    public BluetoothController(String address){
-        init(null, address);
-    }
-
-    public BluetoothController(Context context, String address){
-        init(context, address);
-    }
-
-    private void init(Context context, String address){
+    private void init(Context context, String address, BaseController AC){
         this.context = context;
         this.address = address;
+        this.AC = AC;
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();//获取本地蓝牙适配器
         mBluetoothAdapter.enable();//开启蓝牙（非用户授权模式）
         BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);//生成远程蓝牙设备
@@ -74,20 +72,26 @@ public class BluetoothController {
         }
     }
 
-    public void send(byte[] Ctr, int len){
+    public int send(byte[] Ctr){
         try {
             outStream = btSocket.getOutputStream();
         } catch (IOException e) {
             Log.e(TAG, "Bluetooth: Output stream creation failed.", e);
+            return 0;
         }
         try {
-            for (int i=0; i<len; i++){
-                outStream.write(Ctr[i]);
-            }
+//            for (int i=0; i<len; i++){
+//                outStream.write(Ctr[i]);
+//            }
+            outStream.write(Ctr);
         } catch (IOException e) {
             Log.e(TAG, "Bluetooth: Exception during write.", e);
-            DisplayToast("无法发送信息");
+            //DisplayToast("无法发送信息");
+            return 0;
         }
+        return 1;
+//        TextView OutInfo = (TextView) AC.get("OutInfo");
+//        OutInfo.append("SENT");
     }
 
     public void close(){

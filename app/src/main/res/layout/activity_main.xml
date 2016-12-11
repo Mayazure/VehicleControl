@@ -44,10 +44,32 @@
 
             <Button
                 android:id="@+id/Clear"
-                android:onClick="Clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="清空"/>
+
+            <Button
+                android:id="@+id/Connect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="连接"/>
+
+            <Button
+                android:id="@+id/Reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="回位"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/Stop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="制动"/>
 
             <Switch
                 android:id="@+id/Sync"
@@ -60,29 +82,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="速度保持"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/Stop"
-                android:onClick="Stop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="制动"/>
-
-            <Button
-                android:id="@+id/Reset"
-                android:onClick="Reset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="回位"/>
-
-
-
         </LinearLayout>
 
             <SeekBar
@@ -95,7 +94,5 @@
                 android:id="@+id/RightControlBarInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
     </LinearLayout>
-
 </RelativeLayout>
